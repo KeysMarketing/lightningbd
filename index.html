@@ -44,37 +44,42 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
-            padding: 20px 0;
+            padding: 16px 0;
         }
         
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
         }
         
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            flex-shrink: 0;
+            min-width: 0;
         }
         
         .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
             object-fit: cover;
             box-shadow: 0 4px 12px rgba(241, 194, 50, 0.2);
+            flex-shrink: 0;
         }
         
         .logo-text {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--white);
             letter-spacing: -0.02em;
+            white-space: nowrap;
         }
         
         .nav-link {
@@ -82,13 +87,15 @@
             color: var(--dark-blue);
             background: linear-gradient(135deg, var(--gold) 0%, #e0a91d 100%);
             font-weight: 600;
-            padding: 12px 28px;
+            padding: 10px 16px;
             border-radius: 8px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             letter-spacing: -0.02em;
-            font-size: 0.95rem;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .nav-link::before {
@@ -116,7 +123,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 24px 100px;
+            padding: 100px 24px 80px;
             background: linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 50%, var(--dark-blue) 100%);
             background-size: 200% 200%;
             animation: gradientShift 15s ease infinite;
@@ -560,10 +567,45 @@
             background: var(--light-gray);
         }
         
-        /* Responsive */
+        /* Mobile Responsive */
         @media (max-width: 768px) {
+            /* Mobile Navigation Fixes */
+            nav {
+                padding: 12px 0;
+            }
+            
+            .nav-container {
+                padding: 0 16px;
+                gap: 12px;
+            }
+            
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 1.125rem;
+            }
+            
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            /* Hero adjustments */
+            .hero {
+                padding: 80px 16px 60px;
+            }
+            
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.25rem;
+                line-height: 1.1;
+            }
+            
+            .subtitle {
+                font-size: 1.125rem;
+                margin-bottom: 32px;
             }
             
             .features-header h2,
@@ -582,6 +624,7 @@
             
             .features-grid {
                 gap: 24px;
+                grid-template-columns: 1fr;
             }
             
             .feature {
@@ -602,10 +645,55 @@
             /* Optimize video section for mobile */
             .video-section {
                 transform: none;
+                margin: 0 auto 40px;
+                border-radius: 16px;
             }
             
             .video-section:hover {
                 transform: none;
+            }
+            
+            /* Modal adjustments */
+            .modal-content {
+                margin: 40px auto;
+                padding: 32px;
+            }
+        }
+        
+        /* Very small screens */
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 12px;
+                gap: 8px;
+            }
+            
+            .logo-text {
+                font-size: 1rem;
+            }
+            
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Landscape mobile phones */
+        @media (max-width: 896px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 80px 16px 40px;
+            }
+            
+            .nav-container {
+                padding: 0 16px;
             }
         }
         
@@ -617,12 +705,25 @@
             }
         }
         
-        /* Mobile video optimization */
+        /* Touch device optimizations */
         @media (max-width: 768px) and (pointer: coarse) {
-            /* This targets touch devices */
             .video-wrapper video {
-                /* Video will still play but consider bandwidth */
                 object-fit: cover;
+            }
+            
+            /* Ensure touch targets are large enough */
+            .nav-link {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .btn {
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
     </style>
@@ -657,7 +758,7 @@
                     <video autoplay loop muted playsinline preload="auto">
                         <source src="https://github.com/KeysMarketing/lightningbd/raw/refs/heads/main/Lightning%20BD%20Google%20Sheets%20Video%20Demo%20Compressed.mp4" type="video/mp4">
                         <img src="https://i.imgur.com/rfMU054.png" alt="Lightning BD Demo">
-                    </video> -->
+                    </video>
                 </div>
             </div>
         </div>
