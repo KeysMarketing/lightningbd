@@ -636,7 +636,7 @@
                 <img src="https://i.imgur.com/wPQ94sX.png" alt="Lightning BD" class="logo-img">
                 <span class="logo-text">Lightning BD</span>
             </div>
-            <a href="#" class="nav-link" onclick="alert('Link to Lightning BD Google Sheet template')">Trial on Google Sheets</a>
+            <a href="#" class="nav-link" onclick="alert('https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/edit?usp=sharing')">Trial on Google Sheets</a>
         </div>
     </nav>
     
@@ -655,13 +655,10 @@
                         <p style="font-size: 2rem; margin-bottom: 8px;">📹</p>
                         <p>Demo video goes here</p>
                     </div>
-                    <!-- Replace the above placeholder div with this for video: -->
-                    <!-- <video autoplay loop muted playsinline preload="auto">
-                        <source src="your-demo.mp4" type="video/mp4">
+                    <video autoplay loop muted playsinline preload="auto">
+                        <source src="https://github.com/KeysMarketing/lightningbd/raw/refs/heads/main/Lightning%20BD%20Google%20Sheets%20Video%20Demo%20Compressed.mp4" type="video/mp4">
                         <img src="demo-screenshot.jpg" alt="Lightning BD Demo">
                     </video> -->
-                    <!-- Or for GIF: -->
-                    <!-- <img src="your-demo.gif" alt="Lightning BD Demo" loading="lazy"> -->
                 </div>
             </div>
         </div>
@@ -703,7 +700,7 @@
             <p class="cta-subtitle">Join hundreds of sales pros who've electrified their outreach</p>
             
             <div class="button-group">
-                <a href="#" class="btn btn-primary" onclick="alert('Link to Google Workspace Marketplace')">Get Lightning BD</a>
+                <a href="#" class="btn btn-primary" onclick="alert('https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/edit?usp=sharing')">Trial on Google Sheets</a>
                 <button class="btn btn-secondary" onclick="openModal()">Suggest features</button>
             </div>
         </div>
@@ -754,14 +751,26 @@
         }
         
         function handleSubmit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            console.log('Feedback:', data);
+    event.preventDefault();
+    
+    fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: new FormData(event.target),
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
             alert('Thanks for your feedback! We\'ll review your suggestion.');
             event.target.reset();
             closeModal();
+        } else {
+            alert('Oops! There was a problem. Please try again.');
         }
+    }).catch(error => {
+        alert('Oops! There was a problem. Please try again.');
+    });
+}
     </script>
 </body>
 </html>
