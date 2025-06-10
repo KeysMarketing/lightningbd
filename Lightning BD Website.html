@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#073763">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Lightning BD - Email Automation for Google Sheets</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --dark-blue: #073763;
+            --light-blue: #0b5394;
+            --gold: #FFB800;
+            --purple-accent: #6B5B95;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-blue);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(7, 55, 99, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+            padding: 20px 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(241, 194, 50, 0.2);
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.02em;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-blue);
+            background: linear-gradient(135deg, var(--gold) 0%, #e0a91d 100%);
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: -0.02em;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 184, 0, 0.3);
+        }
+        
+        .nav-link:hover::before {
+            left: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 24px 100px;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 50%, var(--dark-blue) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to bottom, transparent, var(--white));
+            pointer-events: none;
+        }
+        
+        /* Floating shapes */
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(241, 194, 50, 0.1);
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: -150px;
+            animation-delay: 0s;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            bottom: 20%;
+            left: -100px;
+            animation-delay: 5s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 800;
+            line-height: 0.95;
+            margin-bottom: 28px;
+            letter-spacing: -0.04em;
+            color: var(--white);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gradient-text {
+            color: var(--gold);
+        }
+        
+        .subtitle {
+            font-size: 1.375rem;
+            color: var(--gold);
+            margin-bottom: 48px;
+            font-weight: 400;
+            opacity: 0.9;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Video Section */
+        .video-section {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .video-section:hover {
+            transform: perspective(1000px) rotateX(0deg) scale(1.02);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        }
+        
+        .video-wrapper video,
+        .video-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--gray);
+        }
+        
+        /* Features */
+        .features {
+            padding: 120px 24px;
+            background: var(--white);
+            position: relative;
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .features-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .features-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            color: var(--dark-blue);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+        }
+        
+        .feature {
+            text-align: left;
+            padding: 40px;
+            border-radius: 20px;
+            background: var(--light-gray);
+            transform: translateY(0);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+        
+        .feature:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: var(--white);
+            box-shadow: 0 20px 40px rgba(7, 55, 99, 0.15);
+            border-color: rgba(11, 83, 148, 0.2);
+        }
+        
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--light-blue) 0%, var(--dark-blue) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 28px;
+            box-shadow: 0 8px 16px rgba(7, 55, 99, 0.2);
+        }
+        
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--dark-blue);
+            letter-spacing: -0.02em;
+        }
+        
+        .feature p {
+            color: var(--gray);
+            line-height: 1.8;
+            font-weight: 400;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 120px 24px;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,184,0,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
+            color: var(--white);
+        }
+        
+        .cta-subtitle {
+            font-size: 1.25rem;
+            color: var(--gold);
+            margin-bottom: 48px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 16px 36px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: inline-block;
+            letter-spacing: -0.02em;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #e0a91d 100%);
+            color: var(--dark-blue);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(255, 184, 0, 0.4);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+            transform: translateY(-2px);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(7, 55, 99, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 24px;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            max-width: 480px;
+            margin: 80px auto;
+            padding: 48px;
+            border-radius: 24px;
+            position: relative;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.3);
+            animation: modalSlide 0.3s ease-out;
+        }
+        
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 40px;
+            height: 40px;
+            background: var(--light-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-size: 20px;
+            color: var(--gray);
+        }
+        
+        .close:hover {
+            background: var(--dark-blue);
+            color: var(--white);
+            transform: rotate(90deg);
+        }
+        
+        .modal h3 {
+            font-size: 2rem;
+            margin-bottom: 24px;
+            font-weight: 800;
+            color: var(--dark-blue);
+            letter-spacing: -0.02em;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--dark-blue);
+            letter-spacing: -0.01em;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: all 0.2s;
+            background: var(--light-gray);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--light-blue);
+            box-shadow: 0 0 0 4px rgba(11, 83, 148, 0.1);
+            background: var(--white);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.875rem;
+            background: var(--light-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .features-header h2,
+            .cta h2 {
+                font-size: 2rem;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .features-grid {
+                gap: 24px;
+            }
+            
+            .feature {
+                padding: 24px;
+            }
+            
+            /* Hide floating shapes on mobile */
+            .floating-shape {
+                display: none;
+            }
+            
+            /* Reduce animations on mobile */
+            .hero {
+                animation: none;
+                background-size: 100% 100%;
+            }
+            
+            /* Optimize video section for mobile */
+            .video-section {
+                transform: none;
+            }
+            
+            .video-section:hover {
+                transform: none;
+            }
+        }
+        
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+        
+        /* Mobile video optimization */
+        @media (max-width: 768px) and (pointer: coarse) {
+            /* This targets touch devices */
+            .video-wrapper video {
+                /* Video will still play but consider bandwidth */
+                object-fit: cover;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo-container">
+                <!-- Replace with your actual logo -->
+                <img src="https://i.imgur.com/wPQ94sX.png" alt="Lightning BD" class="logo-img">
+                <span class="logo-text">Lightning BD</span>
+            </div>
+            <a href="#" class="nav-link" onclick="alert('Link to Lightning BD Google Sheet template')">Trial on Google Sheets</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        
+        <div class="hero-content">
+            <h1>Scale your outreach without<br>losing the personal touch</h1>
+            <p class="subtitle">Personalize, send, and track emails—all from Google Sheets</p>
+            
+            <div class="video-section">
+                <div class="video-wrapper">
+                    <div class="video-placeholder">
+                        <p style="font-size: 2rem; margin-bottom: 8px;">📹</p>
+                        <p>Demo video goes here</p>
+                    </div>
+                    <!-- Replace the above placeholder div with this for video: -->
+                    <!-- <video autoplay loop muted playsinline preload="auto">
+                        <source src="your-demo.mp4" type="video/mp4">
+                        <img src="demo-screenshot.jpg" alt="Lightning BD Demo">
+                    </video> -->
+                    <!-- Or for GIF: -->
+                    <!-- <img src="your-demo.gif" alt="Lightning BD Demo" loading="lazy"> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features -->
+    <section class="features">
+        <div class="features-container">
+            <div class="features-header">
+                <h2>Everything you need.<br>Nothing you don't.</h2>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon" style="color: white;">📊</div>
+                    <h3>Send directly from Sheets</h3>
+                    <p>No more tab switching. Compose and send personalized emails without leaving Google Sheets.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon" style="color: white;">📈</div>
+                    <h3>Track everything</h3>
+                    <p>Know exactly who's been contacted, when they were reached, and who needs a follow-up.</p>
+                </div>
+                
+                <div class="feature">
+                    <div class="feature-icon" style="color: white;">🎯</div>
+                    <h3>Smart templates</h3>
+                    <p>Use proven scripts and customize on the fly. Perfect personalization meets perfect efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA -->
+    <section class="cta">
+        <div class="cta-container">
+            <h2>The sweet spot between<br>personal and scalable</h2>
+            <p class="cta-subtitle">Join hundreds of sales pros who've electrified their outreach</p>
+            
+            <div class="button-group">
+                <a href="#" class="btn btn-primary" onclick="alert('Link to Google Workspace Marketplace')">Get Lightning BD</a>
+                <button class="btn btn-secondary" onclick="openModal()">Suggest features</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Lightning BD. Email automation that actually works.</p>
+    </footer>
+    
+    <!-- Feedback Modal -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal()">&times;</button>
+            <h3>What should we build next?</h3>
+            <form id="feedbackForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="suggestion">Feature request</label>
+                    <textarea id="suggestion" name="suggestion" placeholder="I wish Lightning BD could..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit feedback</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        function openModal() {
+            document.getElementById('feedbackModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('feedbackModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('feedbackModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            console.log('Feedback:', data);
+            alert('Thanks for your feedback! We\'ll review your suggestion.');
+            event.target.reset();
+            closeModal();
+        }
+    </script>
+</body>
+</html>
