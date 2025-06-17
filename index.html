@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#073763">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>Lightning BD - Email Automation for Google Sheets</title>
+    <title>Lightning BD - Email Automation for Google Sheets<span class="tm">™</span></title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/cP1XlQC.png">
@@ -153,6 +153,76 @@
             100% { background-position: 0% 50%; }
         }
         
+        /* Gradient Mesh Background */
+        .gradient-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .gradient-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.7;
+            animation: blobMove 25s infinite ease-in-out;
+        }
+        
+        .blob-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle at 30% 30%, #0b5394, transparent);
+            top: -200px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+        
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle at 70% 70%, #073763, transparent);
+            top: 20%;
+            right: -150px;
+            animation-delay: 5s;
+        }
+        
+        .blob-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.3), transparent);
+            bottom: -100px;
+            left: 30%;
+            animation-delay: 10s;
+        }
+        
+        .blob-4 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle at 40% 40%, rgba(11, 83, 148, 0.4), transparent);
+            top: 40%;
+            left: 10%;
+            animation-delay: 15s;
+        }
+        
+        @keyframes blobMove {
+            0%, 100% {
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            25% {
+                transform: translate(50px, -50px) scale(1.1) rotate(90deg);
+            }
+            50% {
+                transform: translate(-30px, 30px) scale(0.9) rotate(180deg);
+            }
+            75% {
+                transform: translate(40px, 20px) scale(1.05) rotate(270deg);
+            }
+        }
+        
         .hero::before {
             content: '';
             position: absolute;
@@ -163,6 +233,7 @@
             opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' /%3E%3C/svg%3E");
             pointer-events: none;
+            z-index: 1;
         }
         
         .hero::after {
@@ -665,8 +736,9 @@
                 padding: 24px;
             }
             
-            /* Hide floating shapes on mobile */
-            .floating-shape {
+            /* Hide floating shapes and gradient mesh on mobile */
+            .floating-shape,
+            .gradient-mesh {
                 display: none;
             }
             
@@ -746,6 +818,13 @@
             }
         }
         
+        /* TM symbol styling */
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+        
         /* Touch device optimizations */
         @media (max-width: 768px) and (pointer: coarse) {
             .video-wrapper video {
@@ -778,12 +857,20 @@
                 <img src="https://i.imgur.com/wPQ94sX.png" alt="Lightning BD" class="logo-img">
                 <span class="logo-text">Lightning BD</span>
             </div>
-            <a href="https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/copy" class="nav-link" target="_blank">Trial on Google Sheets</a>
+            <a href="https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/copy" class="nav-link" target="_blank">Trial on Google Sheets<span class="tm">™</span></a>
         </div>
     </nav>
     
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Gradient Mesh Background -->
+        <div class="gradient-mesh">
+            <div class="gradient-blob blob-1"></div>
+            <div class="gradient-blob blob-2"></div>
+            <div class="gradient-blob blob-3"></div>
+            <div class="gradient-blob blob-4"></div>
+        </div>
+        
         <div class="floating-shape shape-1"></div>
         <div class="floating-shape shape-2"></div>
         
@@ -793,7 +880,7 @@
                 <span class="hero-line">without losing the</span>
                 <span class="hero-line">personal touch</span>
             </h1>
-            <p class="subtitle">Personalize, send, and track emails—all from Google Sheets</p>
+            <p class="subtitle">Personalize, send, and track emails—all from Google Sheets<span class="tm">™</span></p>
             
             <div class="video-section">
                 <div class="video-wrapper">
@@ -820,7 +907,7 @@
                 <div class="feature">
                     <div class="feature-icon" style="color: white;">📊</div>
                     <h3>Send directly from Sheets</h3>
-                    <p>No more tab switching. Compose and send personalized emails without leaving Google Sheets.</p>
+                    <p>No more tab switching. Compose and send personalized emails without leaving Google Sheets<span class="tm">™</span>.</p>
                 </div>
                 
                 <div class="feature">
@@ -845,7 +932,7 @@
             <p class="cta-subtitle">Join hundreds of sales pros who've electrified their outreach</p>
             
             <div class="button-group">
-                <a href="https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/copy" class="btn btn-primary" target="_blank">Trial on Google Sheets</a>
+                <a href="https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/copy" class="btn btn-primary" target="_blank">Trial on Google Sheets<span class="tm">™</span></a>
                 <button class="btn btn-secondary" onclick="openModal()">Suggest features</button>
             </div>
         </div>
@@ -854,6 +941,14 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2025 Lightning BD. Email automation that actually works.</p>
+        <p style="margin-top: 16px;">
+            <a href="https://lightning-bd.com/privacy" style="color: var(--gray); text-decoration: none; margin: 0 12px;">Privacy Policy</a>
+            <span style="color: var(--gray);">|</span>
+            <a href="https://lightning-bd.com/terms" style="color: var(--gray); text-decoration: none; margin: 0 12px;">Terms of Service</a>
+            <span style="color: var(--gray);">|</span>
+            <a href="https://lightning-bd.com/support" style="color: var(--gray); text-decoration: none; margin: 0 12px;">Support</a>
+        </p>
+        <p style="margin-top: 12px; font-size: 0.75rem; opacity: 0.8;">Google Sheets<span class="tm">™</span> is a trademark of Google LLC</p>
     </footer>
     
     <!-- Feedback Modal -->
