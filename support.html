@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SN2KNZH4NC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SN2KNZH4NC');
+</script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#073763">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>Support - Lightning BD</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/cP1XlQC.png">
+    <link rel="apple-touch-icon" href="https://i.imgur.com/cP1XlQC.png">
+    <link rel="shortcut icon" href="https://i.imgur.com/cP1XlQC.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --dark-blue: #073763;
+            --light-blue: #0b5394;
+            --gold: #FFB800;
+            --purple-accent: #6B5B95;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-blue);
+            background: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(7, 55, 99, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
+            padding: 16px 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            min-width: 0;
+        }
+        
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(241, 194, 50, 0.2);
+            flex-shrink: 0;
+        }
+        
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            text-decoration: none;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--dark-blue);
+            background: linear-gradient(135deg, var(--gold) 0%, #e0a91d 100%);
+            font-weight: 600;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: -0.02em;
+            font-size: 0.875rem;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        .nav-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 184, 0, 0.3);
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 120px 24px 80px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.03em;
+            color: var(--dark-blue);
+        }
+        
+        .page-header p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .support-section {
+            margin-bottom: 60px;
+            background: var(--light-gray);
+            border-radius: 20px;
+            padding: 40px;
+        }
+        
+        .support-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--dark-blue);
+            letter-spacing: -0.02em;
+        }
+        
+        .support-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            margin-top: 32px;
+            color: var(--dark-blue);
+        }
+        
+        .support-section h3:first-of-type {
+            margin-top: 0;
+        }
+        
+        .support-section p, .support-section li {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .support-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 32px 0;
+            border: 2px solid rgba(11, 83, 148, 0.1);
+        }
+        
+        .contact-info h3 {
+            color: var(--dark-blue);
+            margin-bottom: 16px;
+        }
+        
+        .contact-email {
+            color: var(--light-blue);
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .contact-email:hover {
+            border-bottom-color: var(--light-blue);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.02em;
+            margin-top: 16px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #e0a91d 100%);
+            color: var(--dark-blue);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(255, 184, 0, 0.4);
+        }
+        
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        
+        /* TM symbol styling */
+        .tm {
+            font-size: 0.6em;
+            vertical-align: super;
+            opacity: 0.8;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--gray);
+            font-size: 0.875rem;
+            background: var(--light-gray);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 0;
+            }
+            
+            .nav-container {
+                padding: 0 16px;
+                gap: 12px;
+            }
+            
+            .logo-img {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .logo-text {
+                font-size: 1.125rem;
+            }
+            
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .main-content {
+                padding: 80px 16px 60px;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .support-section {
+                padding: 24px;
+            }
+            
+            .contact-info {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="logo-container" style="text-decoration: none;">
+                <img src="https://i.imgur.com/wPQ94sX.png" alt="Lightning BD" class="logo-img">
+                <span class="logo-text">Lightning BD</span>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/copy" class="nav-link" target="_blank">Trial on Google Sheets<span class="tm">™</span></a>
+        </div>
+    </nav>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1>Support</h1>
+            <p>Get help with Lightning BD and start scaling your outreach</p>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3>Need Help? We're Here for You</h3>
+            <p>For support questions, feature requests, or general inquiries, please email us at <a href="mailto:keys@keys-marketing.com" class="contact-email">keys@keys-marketing.com</a></p>
+            <p style="margin-top: 16px; font-size: 0.9rem; color: var(--gray);">
+                <strong>Response Time:</strong> We typically respond within 2-3 business days.
+            </p>
+        </div>
+        
+        <!-- Getting Started -->
+        <div class="support-section">
+            <h2>Getting Started</h2>
+            
+            <h3>1. Set Up Your Google Sheets<span class="tm">™</span> Template</h3>
+            <p>Start by making a copy of our Lightning BD template:</p>
+            <a href="https://docs.google.com/spreadsheets/d/1FU0TRJoi3XGtEpW_4ADd8GYG7g5C6EQhyHaH34uO084/copy" class="btn btn-primary" target="_blank">Get Google Sheets<span class="tm">™</span> Template</a>
+            
+            <h3>2. Connect Your Gmail Account</h3>
+            <p>The app will guide you through connecting your Gmail account securely. We only request the minimum permissions needed to send emails on your behalf.</p>
+            
+            <h3>3. Import Your Contacts</h3>
+            <p>Add your contact information to the "Contacts" sheet. Required columns include:</p>
+            <ul>
+                <li><strong>Email:</strong> Contact's email address</li>
+                <li><strong>First Name:</strong> For personalization</li>
+                <li><strong>Company:</strong> Contact's company name</li>
+                <li><strong>Status:</strong> Leave blank initially (app will update)</li>
+            </ul>
+        </div>
+        
+        <!-- FAQ -->
+        <div class="support-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h3>What permissions does Lightning BD need?</h3>
+            <p>Lightning BD requests the following Google OAuth scopes:</p>
+            <ul>
+                <li><strong>Google Sheets<span class="tm">™</span>:</strong> To read your contact data and update email status</li>
+                <li><strong>Gmail Send:</strong> To send personalized emails from your account</li>
+                <li><strong>Google Drive (Read-only):</strong> To list and select your Google Sheets<span class="tm">™</span> files</li>
+            </ul>
+            
+            <h3>Is my data secure?</h3>
+            <p>Yes. Lightning BD:</p>
+            <ul>
+                <li>Only accesses the Google Sheets<span class="tm">™</span> files you explicitly select</li>
+                <li>Never stores your contact data on our servers</li>
+                <li>Uses secure OAuth authentication</li>
+                <li>Follows Google's security best practices</li>
+            </ul>
+            
+            <h3>How does email tracking work?</h3>
+            <p>When you send emails through Lightning BD, the app automatically updates your Google Sheets<span class="tm">™</span> with:</p>
+            <ul>
+                <li>Email status (Sent, Failed)</li>
+                <li>Date sent</li>
+                <li>Template used</li>
+                <li>Gmail thread ID for reference</li>
+            </ul>
+            
+            <h3>Can I customize email templates?</h3>
+            <p>Absolutely! Edit the templates in the "Setup" sheet of your Lightning BD Google Sheets<span class="tm">™</span> template. You can:</p>
+            <ul>
+                <li>Modify existing templates</li>
+                <li>Add new templates</li>
+                <li>Use variables like {firstName}, {company}, etc. for personalization</li>
+            </ul>
+            
+            <h3>What if I encounter an error?</h3>
+            <p>If you experience any issues:</p>
+            <ul>
+                <li>Check that your Google Sheets<span class="tm">™</span> template has the correct column headers</li>
+                <li>Ensure your Gmail account is properly connected</li>
+                <li>Verify that email addresses are valid</li>
+                <li>Contact us at keys@keys-marketing.com with details about the error</li>
+            </ul>
+        </div>
+        
+        <!-- Troubleshooting -->
+        <div class="support-section">
+            <h2>Troubleshooting</h2>
+            
+            <h3>App Won't Connect to Google</h3>
+            <p>If you're having trouble connecting your Google account:</p>
+            <ul>
+                <li>Make sure you're using the same Google account for both Sheets and Gmail</li>
+                <li>Clear your browser cache and try again</li>
+                <li>Disable any browser extensions that might block OAuth</li>
+                <li>Try using an incognito/private browser window</li>
+            </ul>
+            
+            <h3>Emails Not Sending</h3>
+            <p>If emails aren't being sent:</p>
+            <ul>
+                <li>Check that email addresses are properly formatted</li>
+                <li>Verify your Gmail account has sending permissions</li>
+                <li>Ensure you haven't exceeded Gmail's daily sending limits</li>
+                <li>Check that required contact fields (email, firstName) are filled</li>
+            </ul>
+            
+            <h3>Can't See My Google Sheets<span class="tm">™</span></h3>
+            <p>If your sheets aren't appearing in the app:</p>
+            <ul>
+                <li>Make sure the sheet is accessible to your connected Google account</li>
+                <li>Check that the sheet has the correct Lightning BD template structure</li>
+                <li>Try refreshing the app or logging out and back in</li>
+            </ul>
+        </div>
+        
+        <!-- Feature Requests -->
+        <div class="support-section">
+            <h2>Feature Requests</h2>
+            <p>We're constantly improving Lightning BD based on user feedback. If you have ideas for new features or improvements, we'd love to hear from you!</p>
+            <p>Send your suggestions to <a href="mailto:keys@keys-marketing.com" style="color: var(--light-blue);">keys@keys-marketing.com</a> or use the feedback form on our homepage.</p>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Lightning BD. Email automation that actually works.</p>
+        <p style="margin-top: 16px;">
+            <a href="https://lightning-bd.com/privacy" style="color: var(--gray); text-decoration: none; margin: 0 12px;">Privacy Policy</a>
+            <span style="color: var(--gray);">|</span>
+            <a href="https://lightning-bd.com/terms" style="color: var(--gray); text-decoration: none; margin: 0 12px;">Terms of Service</a>
+        </p>
+        <p style="margin-top: 12px; font-size: 0.75rem; opacity: 0.8;">Google Sheets<span class="tm">™</span> is a trademark of Google LLC</p>
+    </footer>
+</body>
+</html>
